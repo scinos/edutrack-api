@@ -10,9 +10,8 @@ exports.addClassroom = async (classroomName, username, Classroom) => {
   });
   try {
     await newClassroomObject.save();
-    return { success: 'true', msg: `created new classroom: ${classroomName}` };
+    return { success: true, msg: `created new classroom: ${classroomName}` };
   } catch (error) {
-    console.log(error);
     return { success: false, msg: `Oopsie Doopsie ${error}` };
   }
 };
