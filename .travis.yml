@@ -2,8 +2,5 @@ language: node_js
 node_js: 
 - "stable"
 
-script: 
-- console.log("script")
-
 notifications:
   slack: project-unic0rn:WZpu8mIAHP8zy2a4NqfMTFuq
