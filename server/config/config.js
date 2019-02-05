@@ -1,9 +1,11 @@
-const dev = {
-  db: {
-    host: 'localhost',
-    port: 27017,
-    name: 'eduTrack',
-  },
-}
+const Pool = require('pg').Pool;
 
-module.exports = dev;
+const pool = new Pool({
+  user: 'me',
+  host: 'localhost',
+  database: 'api',
+  password: 'password',
+  port: 5432,
+})
+
+module.exports = pool;
