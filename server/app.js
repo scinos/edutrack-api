@@ -12,6 +12,10 @@ app.post('/users', db.createUser)
 app.put('/users/:id', db.updateUser)
 app.delete('/users/:id', db.deleteUser)
 
+app.route("/hello").get((req, res) => {
+  res.send("Hello Cristian")
+})
+
 app.use((req, res) => {
   res.status(404).json({
     status: 404,
