@@ -8,6 +8,6 @@ cache:
   directories:
     - "node_modules"
 script: 
-  - console.log("Hello world")
+  - echo hello world
 notifications:
   slack: project-unic0rn:WZpu8mIAHP8zy2a4NqfMTFuq
