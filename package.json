@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec"
+    "test": "./node_modules/.bin/mocha --reporter spec",
+    "start": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
     "express": "^4.16.4",
     "mocha": "^5.2.0",
     "mongoose": "^5.4.4",
+    "nodemon": "^1.18.9",
+    "pg": "^7.8.0",
     "request": "^2.88.0"
   }
 }

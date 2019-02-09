@@ -1,15 +1,14 @@
-const mongoose = require('mongoose');
 const config = require('./config/config');
 
-const connectionString = `mongodb://${config.db.host}:${config.db.port}/${config.db.name}`;
 
-function startDatabase() {
-  try {
-    mongoose.connect(connectionString, { useNewUrlParser: true });
-    console.log('done');
-  } catch (error) {
-    console.log(error);
-  }
+const getUsers = (request, response) => {
+  config.query('select * from users', (err, res) => {
+    if(err) {
+      console.log('got here')
+      throw error
+    }
+    response.status(200).json(res.rows)
+  })
 }
 
-module.exports = startDatabase;
+module.exports = getUsers;
