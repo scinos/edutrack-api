@@ -1,14 +1,10 @@
 const express = require('express');
-const api = require('./api/api');
-const startDatabase = require('./database');
 const setupMiddelware = require('./middleware/appMiddleware');
 const db = require("./queries");
 
 const app = express();
-// startDatabase();
 setupMiddelware(app);
 
-// app.use('/api', api);
 
 app.get('/users', db.getUsers)
 app.get('/users/:id', db.getUserById)
