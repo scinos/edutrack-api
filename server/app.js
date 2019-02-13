@@ -1,20 +1,61 @@
+//MODULES
 const express = require('express');
 const setupMiddelware = require('./middleware/appMiddleware');
-const db = require("./queries");
-
+const pg = require("pg");
+//MIDDLEWARE
 const app = express();
 setupMiddelware(app);
+require('dotenv').config()
 
 
-app.get('/users', db.getUsers)
-app.get('/users/:id', db.getUserById)
-app.post('/users', db.createUser)
-app.put('/users/:id', db.updateUser)
-app.delete('/users/:id', db.deleteUser)
-
-app.route("/hello").get((req, res) => {
-  res.send("Hello Cristian")
+//Setup Database
+const client = new pg.Client({
+  host: "localhost",
+  user: "edutrack",
+  password: process.env.DBPASSWORD,
+  database: "edutrackdb",
+  port: 5432
 })
+
+client.connect((err) => {
+  if(err) return console.log(err);
+  else console.log("Connected to dataabse")
+
+})
+
+app.get("/school", (req, res) => {
+  try {
+    client.query("select * from school", (err, result) => {
+      if(err) {
+        console.log(err);
+      }
+    
+      else {
+        res.status(200).send(result.rows)
+      }
+    })
+  } catch(error) {console.log(error)}
+})
+
+
+// create table school (
+//   school_id serial PRIMARY KEY,
+//   name varchar(100),
+//   address varchar(100),
+//   postal_code int,
+//   students int
+// );
+
+
+// Test insert query for get request above ^ 
+// insert into school(name, address, postal_code, students) values ("Mission Hills", "San Marcos", 92069, 3000);
+
+
+
+
+
+app.get("/", (req, res) => {res.status(200).send("Hello")})
+
 
 app.use((req, res) => {
   res.status(404).json({
