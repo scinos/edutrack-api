@@ -7,6 +7,8 @@ install:
 cache:
   directories:
     - "node_modules"
-
+script: 
+  - echo hello world 
+  # Add a script here when tests are added
 notifications:
   slack: project-unic0rn:WZpu8mIAHP8zy2a4NqfMTFuq
