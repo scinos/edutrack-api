@@ -10,11 +10,11 @@ require('dotenv').config()
 
 //Setup Database
 const client = new pg.Client({
-  host: "localhost",
-  user: "edutrack",
-  password: process.env.DBPASSWORD,
-  database: "edutrackdb",
-  port: 5432
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
 })
 
 client.connect((err) => {
@@ -29,7 +29,7 @@ app.get("/school", (req, res) => {
       if(err) {
         console.log(err);
       }
-    
+
       else {
         res.status(200).send(result.rows)
       }
@@ -47,7 +47,7 @@ app.get("/school", (req, res) => {
 // );
 
 
-// Test insert query for get request above ^ 
+// Test insert query for get request above ^
 // insert into school(name, address, postal_code, students) values ("Mission Hills", "San Marcos", 92069, 3000);
 
 
