@@ -11,5 +11,17 @@ services:
       - db_volume:/var/lib/postgresql/data
     command: postgres -p $DB_PORT
 
+  api:
+    build: .
+    env_file:
+      - .env
+    ports:
+     - "8080:8080"
+    volumes:
+      - ./server:/app/server
+    command: dockerize -wait tcp://db:$DB_PORT -- npm start
+    depends_on:
+      - db
+
 volumes:
   db_volume:
