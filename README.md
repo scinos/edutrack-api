@@ -6,24 +6,29 @@ Install Docker:
 * For OSX: https://docs.docker.com/docker-for-mac/install/
 * For Windows: https://docs.docker.com/docker-for-windows/install/
 
-## Start the DB
+## Start the services
 
-Run `docker-compose up db`. When you see the line `LOG:  database system is ready to accept connections`,
-the databse is ready for connections.
-
-If you need to connect the database from your host, use `localhost:5432`, using the credentials are
-stored in `.env`.
+Run `docker-compose up api`. When you see the line `server running`, the service is ready to accept connections
+in `http://localhost:8080`. This command will also start the databse. If you need to connect the database from
+your host, use `localhost:15432`, using the credentials are stored in `.env`.
 
 If you already have PostgreSQL server running in your host, you can pass the env variable `DB_HOST_PORT`
-to change the port. For example, start with `DB_HOST_PORT=54321 docker-compose up` and connect to `localhost:54321`.
+to change the port. For example, start with `DB_HOST_PORT=25432-compose up api` and connect to
+`localhost:25432` instead.
 
-## Stopping the DB
+The `api` service will restart automatically every time you change a file in `./server`.
 
-`Ctrl+C` should stop it.
+To install a new dependency (or update an existint one), you have to install it normally (e.g. `npm install my-dep`)
+and start the service with `docker-compose up --build api`.
 
-## Restarting the DB
+## Stopping the services
 
-If there is something wrong (eg: the database doesn't start), you can reset it with `docker-compose down`.
+`Ctrl+C` should stop them. It for whatever reason this doesn't work, run `docker-compose down` in another terminal.
+
+## Restarting the services
+
+If there is something wrong (eg: the database doesn't start), you can reset all services with `docker-compose down`
+and try to start them again.
 
 If this doesn't solve the issue, you can try a hard reset: `docker-compose down --rmi all -v`. Warning: this will
 delete any local data, you'll start with an empty database.
