@@ -9,6 +9,7 @@ services:
       - $DB_HOST_PORT:$DB_PORT
     volumes:
       - db_volume:/var/lib/postgresql/data
+    command: postgres -p $DB_PORT
 
 volumes:
   db_volume:

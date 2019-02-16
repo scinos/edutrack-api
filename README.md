@@ -11,11 +11,11 @@ Install Docker:
 Run `docker-compose up db`. When you see the line `LOG:  database system is ready to accept connections`,
 the databse is ready for connections.
 
-If you need to connect the database from your host, use `localhost:5432`, using the credentials are
+If you need to connect the database from your host, use `localhost:15432`, using the credentials are
 stored in `.env`.
 
 If you already have PostgreSQL server running in your host, you can pass the env variable `DB_HOST_PORT`
-to change the port. For example, start with `DB_HOST_PORT=54321 docker-compose up` and connect to `localhost:54321`.
+to change the port. For example, start with `DB_HOST_PORT=25432 docker-compose up` and connect to `localhost:25432`.
 
 ## Stopping the DB
 
