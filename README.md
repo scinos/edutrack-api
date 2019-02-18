@@ -1,5 +1,13 @@
 # Development
 
+## Code style
+
+This project uses [prettier](https://prettier.io/) and [eslint](https://eslint.org/) (with [airbnb-base](https://github.com/airbnb/javascript) config) to define the code style.
+
+It is recommended to install Prettier in your editor for a better dev experience:
+    * VS Code: https://github.com/prettier/prettier-vscode and https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+    * Webstorm: https://prettier.io/docs/en/webstorm.html  and https://plugins.jetbrains.com/plugin/7494-eslint
+
 ## Setup Docker
 
 Install Docker:
