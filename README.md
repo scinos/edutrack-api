@@ -19,18 +19,17 @@ and use that value instead of `localhost` (eg: `http://1.2.3.4:8080`)
 
 ## Start the services
 
+The first time you clone this repo, you have to build the services with `docker-compose build`. It is also recommended
+to do run the same command when you switch branches or update master to make sure the services are running with the
+latest dependencies.
+
 Run `docker-compose up api`. When you see the line `server running`, the service is ready to accept connections
-in `http://localhost:8080`. This command will also start the databse. If you need to connect the database from
-your host, use `localhost:15432`, using the credentials are stored in `.env`.
+in `http://localhost:8080`.  The service will restart automatically every time you change a file in `./server`.
 
-If you already have PostgreSQL server running in your host, you can pass the env variable `DB_HOST_PORT`
-to change the port. For example, start with `DB_HOST_PORT=25432-compose up api` and connect to
-`localhost:25432` instead.
+To install a new dependency (or update an existint one), you have to install it normally (e.g. `npm install my-dep`), then
+build the service (`docker-compose build`) and start it (`docker-compose up api`).
 
-The `api` service will restart automatically every time you change a file in `./server`.
-
-To install a new dependency (or update an existint one), you have to install it normally (e.g. `npm install my-dep`)
-and start the service with `docker-compose up --build api`.
+ProTip: `docker-compose up --build api` is a shortcut for running `docker-compose build` + `docker-compose up api`.
 
 ## Stopping the services
 
