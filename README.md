@@ -14,6 +14,9 @@ Install Docker:
 * For OSX: https://docs.docker.com/docker-for-mac/install/
 * For Windows: https://docs.docker.com/docker-for-windows/install/
 
+Note: this document assumes OSX. If you are using Windows, you have run `docker-machine ip` to get the IP
+and use that value instead of `localhost` (eg: `http://1.2.3.4:8080`)
+
 ## Start the services
 
 Run `docker-compose up api`. When you see the line `server running`, the service is ready to accept connections
@@ -40,3 +43,16 @@ and try to start them again.
 
 If this doesn't solve the issue, you can try a hard reset: `docker-compose down --rmi all -v`. Warning: this will
 delete any local data, you'll start with an empty database.
+
+## Database
+
+If you need to connect the database from your host, use `localhost:15432`, using the credentials are stored in `.env`.
+If you already have PostgreSQL server running in that port, you can pass the env variable `DB_HOST_PORT` to change
+the port. For example, start with `DB_HOST_PORT=25432-compose up api` and connect to `localhost:25432` instead.
+
+You can use [DBeaver](https://dbeaver.io/download/) to connect to the database. Is a multi-platform open-source GUI to
+interact with many types of databases, including PostgreSQL.
+
+Every time the service starts it will create all needed tables _if they don't exist_. This means that if you change the
+model definition (eg: add a new column), you have to manually drop the table from the database and then restart the
+service so it gets recreated.
