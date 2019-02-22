@@ -22,6 +22,7 @@
     "eslint": "^5.12.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
+    "prettier": "^1.16.4",
     "sinon": "^7.2.2"
   },
   "dependencies": {
@@ -38,8 +39,9 @@
     "mocha": "^5.2.0",
     "mongoose": "^5.4.4",
     "nodemon": "^1.18.9",
-    "pg": "^7.8.0",
-    "prettier": "^1.16.4",
-    "request": "^2.88.0"
+    "pg-hstore": "^2.3.2",
+    "pg": "^7.8.1",
+    "request": "^2.88.0",
+    "sequelize": "^4.42.0"
   }
 }
