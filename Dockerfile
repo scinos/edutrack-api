@@ -7,6 +7,6 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
     && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json .sequelizerc ./
 RUN npm install
 COPY server ./server

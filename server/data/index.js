@@ -1,14 +1,14 @@
 const Sequelize = require('sequelize');
-
-const { DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT } = require('../services/config');
+const Umzug = require('umzug');
+const path = require('path');
+const loadModels = require('./loadModels');
+const { development: dbConfig } = require('./config');
 
 let sequelize;
 
-const init = () => {
-  sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
-    host: DB_HOST,
-    port: DB_PORT,
-    dialect: 'postgres',
+const init = async () => {
+  sequelize = new Sequelize({
+    ...dbConfig,
     pool: {
       max: 5,
       min: 0,
@@ -17,24 +17,21 @@ const init = () => {
     },
   });
 
-  const School = sequelize.define(
-    'school',
-    {
-      id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.literal('uuid_generate_v4()'),
-        primaryKey: true,
-      },
-      name: {
-        type: Sequelize.STRING,
-      },
-    },
-    {
-      timestamps: true,
-    },
-  );
+  loadModels(sequelize);
 
-  return School.sync();
+  const umzug = new Umzug({
+    storage: 'sequelize',
+    storageOptions: {
+      sequelize,
+      tableName: '_meta',
+    },
+    logging: console.log,
+    migrations: {
+      path: path.resolve(__dirname, 'migrations'),
+      params: [sequelize.getQueryInterface(), sequelize.Sequelize],
+    },
+  });
+  await umzug.up();
 };
 
 module.exports = {

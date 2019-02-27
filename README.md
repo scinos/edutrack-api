@@ -52,6 +52,22 @@ the port. For example, start with `DB_HOST_PORT=25432-compose up api` and connec
 You can use [DBeaver](https://dbeaver.io/download/) to connect to the database. Is a multi-platform open-source GUI to
 interact with many types of databases, including PostgreSQL.
 
-Every time the service starts it will create all needed tables _if they don't exist_. This means that if you change the
-model definition (eg: add a new column), you have to manually drop the table from the database and then restart the
-service so it gets recreated.
+This service uses [Sequelize migrations](http://docs.sequelizejs.com/manual/tutorial/migrations.html) to keep the database
+up to date. To run the CLI, run `docker-compose exec api npm run sequelize <command>` after the service is up. Please read
+the Sequelize tutorial for more info on how to use this tool. As a cookbook, these are the common operations
+
+### Creating a new table
+
+`docker-compose exec api npm run sequelize -- model:generate --name User --attributes firstName:string,lastName:string`
+Then tweak the new migration in `./server/data/migrations` and the new model file in `./server/data/models` to match our
+code style and add attributes as needed.
+
+Once a model is generated, we must not change the migration file. If we need to make changes to the database, we have to
+generate a new migration (see next command).
+
+### Updating a table a new model
+
+`docker-compose exec api npm run sequelize -- migration:generate --name add_user_email`
+Then actually write the migration code in the new file in `./server/data/migrations`.
+
+

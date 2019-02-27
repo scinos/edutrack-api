@@ -6,6 +6,7 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec",
     "start": "nodemon server/server.js",
+    "sequelize": "sequelize",
     "lint": "eslint ."
   },
   "repository": {
@@ -39,9 +40,11 @@
     "mocha": "^5.2.0",
     "mongoose": "^5.4.4",
     "nodemon": "^1.18.9",
-    "pg-hstore": "^2.3.2",
     "pg": "^7.8.1",
+    "pg-hstore": "^2.3.2",
     "request": "^2.88.0",
-    "sequelize": "^4.42.0"
+    "sequelize": "^4.42.0",
+    "sequelize-cli": "^5.4.0",
+    "umzug": "^2.2.0"
   }
 }
